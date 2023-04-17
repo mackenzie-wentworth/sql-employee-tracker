@@ -1,0 +1,1 @@
+-- TODO: Create 'INSERT' data with 'VALUES' for tables in schema.sql file
