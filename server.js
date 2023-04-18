@@ -67,14 +67,3 @@ inquirer
       ? console.log('Success! Please make your next selection.')
       : console.log('Exited Options menu, goodbye.')
   );
-
-function viewQuery(queryUsed) {
-  connection.query(queryUsed, function (err, rows) {
-    if (err) throw err;
-    console.log(`\n`);
-    console.table(rows);
-    init();
-  });
-}
-// Function call to initialize logo.svg app
-init();
