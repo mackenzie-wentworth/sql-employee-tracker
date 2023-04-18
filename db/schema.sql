@@ -15,8 +15,9 @@ CREATE TABLE department (
 CREATE TABLE role (
     id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
     title VARCHAR (30) NOT NULL,
-    salary DECIMAL(10.3) NOT NULL,
-    department_id INT NOT NULL
+    salary DECIMAL NOT NULL,
+    department_id INT NOT NULL,
+    FOREIGN KEY(department_id) REFERENCES departments(id)
 );
 
 -- Added MANAGER table to be the PRIMARY KEY for 'manager_id' in the employee table
@@ -33,5 +34,7 @@ CREATE TABLE employee (
     first_name VARCHAR (30) NOT NULL,
     last_name VARCHAR (30) NOT NULL,
     role_id INT NOT NULL,
-    manager_id INT NULL
+    manager_id INT NULL,
+    FOREIGN KEY (role_id) REFERENCES role(id),
+    FOREIGN KEY (manager_id) REFERENCES employee(id)
 );
