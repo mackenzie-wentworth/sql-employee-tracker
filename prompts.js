@@ -3,7 +3,7 @@
 const DeptPrompt = [
     {
         type:"input",
-        name:"department_name",
+        name:"name",
         message:"What is the name of the department?"
     }
 ]
@@ -14,7 +14,7 @@ const DeptPrompt = [
 const RolePrompt = [
     {
         type:"input",
-        name:"roleTitle",
+        name:"title",
         message:"What is the name of the role?"
     },
     {
@@ -52,17 +52,17 @@ const RolePrompt = [
 const EmployeePrompt = [
     {
         type:"input",
-        name:"firstName",
+        name:"first_name",
         message:"What is the employee's first name?"
     },
     {
         type:"input",
-        name:"lastName",
+        name:"last_name",
         message:"What is the employee's last name?"
     },
     {
         type:"input",
-        name:"role",
+        name:"role_id",
         message:"What is the employee's role?"
     },
     {

@@ -120,15 +120,15 @@ function viewQuery(queryUsed) {
 
 // Prompt user for new department to add to the database
 async function addDepartment() {
-  var department_name = "";
+  var departmentName = "";
 
   let insertQuery = `INSERT INTO department (department_name) VALUES (?);`;
 
   inquirer.prompt(DeptPrompt)
     .then((answers) => {
-      department_name = answers["department_name"];
+      departmentName = answers["departmentName"];
 
-      db.query(insertQuery, [department_name], (err, rows) => {
+      db.query(insertQuery, [departmentName], (err, rows) => {
         if (err) throw err;
         console.log("Row inserted with id = "
           + rows.insertId);
@@ -139,7 +139,7 @@ async function addDepartment() {
 };
 
  // Prompt user for new role to add to database
-async function addRole() {
+ async function addRole() {
   var title = "";
   var salary = "";
   var department_id = "";
@@ -148,11 +148,11 @@ async function addRole() {
 
   inquirer.prompt(RolePrompt)
     .then((answers) => {
-      roleTitle = answers["roleTitle"];
+      title = answers["title"];
       salary = answers["salary"];
       department_id = answers["department_id"];
 
-      db.query(insertQuery, [title, salary, department_id], (err, rows) => {
+      connection.query(insertQuery, [title, salary, department_id], (err, rows) => {
         if (err) throw err;
         console.log("Row inserted with id = "
           + rows.insertId);
@@ -160,25 +160,26 @@ async function addRole() {
       });
 
     })
+
 };
 
 // Prompt user for new employee to add to the database
 async function addEmployee() {
-  var firstName = "";
-  var lastName = "";
-  var role = "";
-  var manager = "";
+  var first_name = "";
+  var last_name = "";
+  var role_id = "";
+  var manager_id = "";
 
   let insertQuery = `INSERT INTO employee (first_name, last_name, role_id, manager_id) VALUES (?,?,?,?);`;
 
   inquirer.prompt(EmployeePrompt)
     .then((answers) => {
-      firstName = answers["firstName"];
-      lastName = answers["lastName"];
-      role = answers["role"];
-      manager = answers["manager"];
+      first_name = answers["first_name"];
+      last_name = answers["last_name"];
+      role_id = answers["role_id"];
+      manager_id = answers["manager_id"];
 
-      connection.query(insertQuery, [firstName, lastName, role, manager], (err, rows) => {
+      connection.query(insertQuery, [first_name, last_name, role_id, manager_id], (err, rows) => {
         if (err) throw err;
         console.log("Row inserted with id = "
           + rows.insertId);
