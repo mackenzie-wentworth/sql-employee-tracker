@@ -19,7 +19,7 @@ const db = mysql.createConnection(
   console.log(`Connected to the employeesMgmtDB database`)
 );
 
-connection.connect(function (err) {
+db.connect(function (err) {
   if (err) {
     console.log("Error occurred while connecting!");
   }
@@ -99,7 +99,7 @@ inquirer
     });
 
 function viewQuery(queryUsed) {
-  connection.query(queryUsed, function (err, rows) {
+  db.query(queryUsed, function (err, rows) {
     if (err) throw err;
     console.log(`\n`);
     console.table(rows);
@@ -112,3 +112,27 @@ function viewQuery(queryUsed) {
   //     ? console.log('Success! Please make your next selection.')
   //     : console.log('Exited Options menu, goodbye.')
   // );
+
+
+
+// Prompt user for new department to add to the database
+async function addDepartment() {
+  var name = "";
+
+  let insertQuery = `INSERT INTO department (name) VALUES (?);`;
+
+  inquirer.prompt(DeptPrompt)
+    .then((answers) => {
+      name = answers["name"];
+
+      db.query(insertQuery, [name], (err, rows) => {
+        if (err) throw err;
+        console.log("Row inserted with id = "
+          + rows.insertId);
+        init();
+      });
+
+    })
+
+};
+ 
