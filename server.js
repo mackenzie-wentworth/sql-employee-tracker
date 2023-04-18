@@ -62,8 +62,37 @@ inquirer
         quitOption
       ]
     })
-    .then((response) =>
-      response.option === response.quitOption
-      ? console.log('Success! Please make your next selection.')
-      : console.log('Exited Options menu, goodbye.')
-  );
+    .then(function ({ choices }) {
+      switch (choices) {
+        case viewDeptOption:
+          break;
+
+        case viewRolesOption:
+          break;
+
+        case viewEmployeeOption:
+          break;
+
+        case addDeptOption:
+          break;
+
+        case addRoleOption:
+          break;
+
+        case addEmployeeOption:
+          break;
+
+        case updateEmployeeRoleOption:
+          break;
+
+        case quitOption:
+          break;
+      }
+    });
+
+
+  //   .then((response) =>
+  //     response.option === response.quitOption
+  //     ? console.log('Success! Please make your next selection.')
+  //     : console.log('Exited Options menu, goodbye.')
+  // );
