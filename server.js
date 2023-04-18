@@ -2,7 +2,7 @@
 const mysql = require('mysql2');
 const inquirer = require('inquirer');
 const consoleTable = require('console.table');
-const { DeptPrompt, RolePrompt, EmployeePrompt, ManagerPrompt} = require("./InsertPrompts");
+const { DeptPrompt, RolePrompt, EmployeePrompt} = require("./InsertPrompts");
 
 const PORT = process.env.PORT || 3001;
 
@@ -120,15 +120,15 @@ function viewQuery(queryUsed) {
 
 // Prompt user for new department to add to the database
 async function addDepartment() {
-  var name = "";
+  var department_name = "";
 
-  let insertQuery = `INSERT INTO department (name) VALUES (?);`;
+  let insertQuery = `INSERT INTO department (department_name) VALUES (?);`;
 
   inquirer.prompt(DeptPrompt)
     .then((answers) => {
-      name = answers["department_name"];
+      department_name = answers["department_name"];
 
-      db.query(insertQuery, [name], (err, rows) => {
+      db.query(insertQuery, [department_name], (err, rows) => {
         if (err) throw err;
         console.log("Row inserted with id = "
           + rows.insertId);
@@ -148,7 +148,7 @@ async function addRole() {
 
   inquirer.prompt(RolePrompt)
     .then((answers) => {
-      title = answers["role_title"];
+      roleTitle = answers["roleTitle"];
       salary = answers["salary"];
       department_id = answers["department_id"];
 
@@ -162,3 +162,29 @@ async function addRole() {
     })
 };
 
+// Prompt user for new employee to add to the database
+async function addEmployee() {
+  var firstName = "";
+  var lastName = "";
+  var role = "";
+  var manager = "";
+
+  let insertQuery = `INSERT INTO employee (first_name, last_name, role_id, manager_id) VALUES (?,?,?,?);`;
+
+  inquirer.prompt(EmployeePrompt)
+    .then((answers) => {
+      firstName = answers["firstName"];
+      lastName = answers["lastName"];
+      role = answers["role"];
+      manager = answers["manager"];
+
+      connection.query(insertQuery, [firstName, lastName, role, manager], (err, rows) => {
+        if (err) throw err;
+        console.log("Row inserted with id = "
+          + rows.insertId);
+        init();
+      });
+
+    })
+
+};
