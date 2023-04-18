@@ -18,6 +18,15 @@ const db = mysql.createConnection(
   console.log(`Connected to the employeesMgmtDB database`)
 );
 
+connection.connect(function (err) {
+  if (err) {
+    console.log("error occurred while connecting");
+  }
+  else {
+    console.log("connection created with Mysql successfully");
+  }
+});
+
 
 // Prompt options: (1)View all departments, (2)View all roles, (3)View all employees, (4)Add a department, (5)Add a role, (6)Add an employee, (7)Update an employee role
 
