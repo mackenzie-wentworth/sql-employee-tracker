@@ -126,7 +126,7 @@ async function addDepartment() {
 
   inquirer.prompt(DeptPrompt)
     .then((answers) => {
-      name = answers["name"];
+      name = answers["department_name"];
 
       db.query(insertQuery, [name], (err, rows) => {
         if (err) throw err;
@@ -148,7 +148,7 @@ async function addRole() {
 
   inquirer.prompt(RolePrompt)
     .then((answers) => {
-      title = answers["title"];
+      title = answers["role_title"];
       salary = answers["salary"];
       department_id = answers["department_id"];
 
