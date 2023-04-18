@@ -28,7 +28,24 @@ const RolePrompt = [
         message:"Which department does the role belong to?"
     }
 ]
-
+// Added ManagerPrompt to go with 'manager_id' in schema.sql file
+const ManagerPrompt = [
+    {
+        type:"input",
+        name:"first_name",
+        message:"What is the manager's first name?"
+    },
+    {
+        type:"input",
+        name:"last_name",
+        message:"What is the manager's last name?"
+    },
+    {
+        type:"input",
+        name:"department",
+        message:"Which department does the manager belong to?"
+    }
+]
 
 // TODO: WHEN I choose to add an employee
 // THEN I am prompted to enter the employee’s first name, last name, role, and manager, and that employee is added to the database
@@ -56,4 +73,4 @@ const EmployeePrompt = [
 ]
 
 // Export prompts
-module.exports = {DeptPrompt, RolePrompt, EmployeePrompt};
+module.exports = {DeptPrompt, RolePrompt, EmployeePrompt, ManagerPrompt};
