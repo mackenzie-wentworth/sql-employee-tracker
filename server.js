@@ -46,8 +46,9 @@ const viewRolesQuery = "SELECT * FROM role";
 const viewEmployeeQuery = "SELECT * FROM employee";
 
 // function which prompts the user for what action they should take
-inquirer
-  .prompt({
+function init() {
+  inquirer
+    .prompt({
       type: "list",
       message: "What would you like to do?",
       name: "option",
@@ -93,16 +94,18 @@ inquirer
           break;
 
         case quitOption:
-          connection.end();
+          db.end();
           break;
       }
     });
+}
 
 function viewQuery(queryUsed) {
   db.query(queryUsed, function (err, rows) {
     if (err) throw err;
     console.log(`\n`);
     console.table(rows);
+    init();
   });
 }
 
@@ -133,6 +136,29 @@ async function addDepartment() {
       });
 
     })
-
 };
- 
+
+ // Prompt user for new role to add to database
+async function addRole() {
+  var title = "";
+  var salary = "";
+  var department_id = "";
+
+  let insertQuery = `INSERT INTO role (title, salary, department_id) VALUES (?,?,?);`;
+
+  inquirer.prompt(RolePrompt)
+    .then((answers) => {
+      title = answers["title"];
+      salary = answers["salary"];
+      department_id = answers["department_id"];
+
+      db.query(insertQuery, [title, salary, department_id], (err, rows) => {
+        if (err) throw err;
+        console.log("Row inserted with id = "
+          + rows.insertId);
+        init();
+      });
+
+    })
+};
+
