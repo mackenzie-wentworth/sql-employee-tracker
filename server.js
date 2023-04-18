@@ -62,33 +62,49 @@ inquirer
         quitOption
       ]
     })
-    .then(function ({ choices }) {
-      switch (choices) {
+    .then(function ({ option }) {
+      switch (option) {
         case viewDeptOption:
+          viewQuery(viewDeptQuery);
           break;
 
         case viewRolesOption:
+          viewQuery(viewRolesQuery);
           break;
 
         case viewEmployeeOption:
+          viewQuery(viewEmployeeQuery);
           break;
 
         case addDeptOption:
+          addDepartment();
           break;
 
         case addRoleOption:
+          addRole();
           break;
 
         case addEmployeeOption:
+          addEmployee();
           break;
 
         case updateEmployeeRoleOption:
+          updateEmployeeRole();
           break;
 
         case quitOption:
+          connection.end();
           break;
       }
     });
+
+function viewQuery(queryUsed) {
+  connection.query(queryUsed, function (err, rows) {
+    if (err) throw err;
+    console.log(`\n`);
+    console.table(rows);
+  });
+}
 
 
   //   .then((response) =>
