@@ -20,10 +20,10 @@ const db = mysql.createConnection(
 
 connection.connect(function (err) {
   if (err) {
-    console.log("error occurred while connecting");
+    console.log("Error occurred while connecting!");
   }
   else {
-    console.log("connection created with Mysql successfully");
+    console.log("Connection created with MySQL successfully!");
   }
 });
 
