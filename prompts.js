@@ -24,7 +24,7 @@ const RolePrompt = [
     },
     {
         type:"input",
-        name:"department",
+        name:"department_id",
         message:"Which department does the role belong to?"
     }
 ]
@@ -35,12 +35,12 @@ const RolePrompt = [
 const EmployeePrompt = [
     {
         type:"input",
-        name:"firstname",
+        name:"first_name",
         message:"What is the employee's first name?"
     },
     {
         type:"input",
-        name:"lastname",
+        name:"last_name",
         message:"What is the employee's last name?"
     },
     {
@@ -50,7 +50,7 @@ const EmployeePrompt = [
     },
     {
         type:"input",
-        name:"manager",
+        name:"employee_manager",
         message:"Who is the employee's manager?"
     }
 ]
