@@ -120,15 +120,15 @@ function viewQuery(queryUsed) {
 
 // Prompt user for new department to add to the database
 async function addDepartment() {
-  var departmentName = "";
+  var name = "";
 
-  let insertQuery = `INSERT INTO department (department_name) VALUES (?);`;
+  let insertQuery = `INSERT INTO department (name) VALUES (?);`;
 
   inquirer.prompt(DeptPrompt)
     .then((answers) => {
-      departmentName = answers["departmentName"];
+      name = answers["name"];
 
-      db.query(insertQuery, [departmentName], (err, rows) => {
+      db.query(insertQuery, [name], (err, rows) => {
         if (err) throw err;
         console.log("Row inserted with id = "
           + rows.insertId);
@@ -188,4 +188,22 @@ async function addEmployee() {
 
     })
 
+};
+
+// Update an employee role
+function updateEmployeeRole() {
+
+  db.query(viewEmployeeQuery, function (err, res) {
+    if (err) throw (err);
+    inquirer
+      .prompt([
+        {
+          name: "employeeName",
+          type: "list",
+
+          message: "Which employee's role is changing?",
+          choices: []
+        }
+      ])
+  })
 };

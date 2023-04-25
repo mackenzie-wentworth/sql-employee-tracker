@@ -49,7 +49,7 @@ const EmployeePrompt = [
     },
     {
         type:"input",
-        name:"manager",
+        name:"manager_id",
         message:"Who is the employee's manager?"
     }
 ]
