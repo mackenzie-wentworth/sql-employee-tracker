@@ -25,8 +25,18 @@ db.connect(function (err) {
   }
   else {
     console.log("Connection created with MySQL successfully!");
+    displayAppTitle();
+    init();
   }
 });
+
+function displayAppTitle() {
+  console.log(`
+.----------------------.
+|   Employee Manager   |
+'----------------------'
+`);
+}
 
 
 // Prompt options: (1)View all departments, (2)View all roles, (3)View all employees, (4)Add a department, (5)Add a role, (6)Add an employee, (7)Update an employee role
@@ -194,7 +204,6 @@ async function addEmployee() {
 function updateEmployeeRole() {
   var employeeList = [];
   var roleList = [];
-
 
   db.query(viewEmployeeQuery, function (err, result) {
     if (err) throw (err);
