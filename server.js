@@ -2,7 +2,7 @@
 const mysql = require('mysql2');
 const inquirer = require('inquirer');
 const consoleTable = require('console.table');
-const { DeptPrompt, RolePrompt, EmployeePrompt } = require("./InsertPrompts");
+const { DeptPrompt, RolePrompt, EmployeePrompt } = require("./prompts");
 
 const PORT = process.env.PORT || 3001;
 
