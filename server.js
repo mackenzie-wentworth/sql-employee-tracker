@@ -2,7 +2,7 @@
 const mysql = require('mysql2');
 const inquirer = require('inquirer');
 const consoleTable = require('console.table');
-const { DeptPrompt, RolePrompt, EmployeePrompt } = require("./prompts");
+const { DeptPrompt, RolePrompt, EmployeePrompt } = require("./InsertPrompts");
 
 const PORT = process.env.PORT || 3001;
 
@@ -237,6 +237,23 @@ function updateEmployeeRole() {
                 }
               }
             ])
+            .then(function (roleAnswer) {
+              const role = roleAnswer.role_id;
+              console.log(role);
+              db.query('SELECT * FROM role WHERE title = ?', [role], function (err, res) {
+                if (err) throw (err);
+                let newRole = res[0].id;
+
+                let query = "UPDATE employee SET role_id = ? WHERE last_name =  ?";
+                let values = [parseInt(newRole), name]
+
+                db.query(query, values,
+                  function (err, res, fields) {
+                    console.log(`You have updated ${name}'s role to ${role}.`);
+                    init();
+                  })
+              })
+            })
         })
       })
   })
