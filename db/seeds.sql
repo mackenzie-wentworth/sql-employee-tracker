@@ -16,18 +16,7 @@ VALUES  (1, "Sales Lead", 100000, 4),
         (5, "Account Manager", 160000, 2),
         (6, "Accountant", 125000, 2),
         (7, "Legal Team Lead" 250000, 3),
-        (8, "Lawyer", 190000, 3)
-
--- manager data to pre-populate manager table
-INSERT INTO manager (id, department_id, first_name, last_name)
-VALUES  (1, 1, "Matt", "Damon"),
-        (2, 2, "Brad", "Pitt"),
-        (3, 3, "Kate", "Hudson"),
-        (4, 4, "Emma", "Watson"),
-        (5, 5, "Chris", "Evans"),
-        (6, 6, "Cameron", "Diaz"),
-        (7, 7, "Adam", "Sandler"),
-        (8, 8, "Julia", "Roberts")        
+        (8, "Lawyer", 190000, 3)      
 
 -- employee data to pre-populate employee table
 INSERT INTO employee (id, role_id, first_name, last_name, manager_id)

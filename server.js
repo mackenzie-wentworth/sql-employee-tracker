@@ -9,6 +9,7 @@ const PORT = process.env.PORT || 3001;
 // Connect to SQL database
 const db = mysql.createConnection(
   {
+    // host: 'localhost',
     host: '127.0.0.1',
     // MySQL username,
     user: 'root',
@@ -119,15 +120,6 @@ function viewQuery(queryUsed) {
   });
 }
 
-
-//   .then((response) =>
-//     response.option === response.quitOption
-//     ? console.log('Success! Please make your next selection.')
-//     : console.log('Exited Options menu, goodbye.')
-// );
-
-
-
 // Prompt user for new department to add to the database
 async function addDepartment() {
   var name = "";
@@ -170,7 +162,6 @@ async function addRole() {
       });
 
     })
-
 };
 
 // Prompt user for new employee to add to the database
@@ -197,7 +188,6 @@ async function addEmployee() {
       });
 
     })
-
 };
 
 // Update an employee role
@@ -258,7 +248,9 @@ function updateEmployeeRole() {
 
                 db.query(query, values,
                   function (err, res, fields) {
+                    console.log(`\n`);
                     console.log(`You have updated ${name}'s role to ${role}.`);
+                    console.log(`\n`);
                     init();
                   })
               })
