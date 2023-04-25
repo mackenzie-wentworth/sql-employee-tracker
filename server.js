@@ -162,7 +162,7 @@ async function addRole() {
       salary = answers["salary"];
       department_id = answers["department_id"];
 
-      connection.query(insertQuery, [title, salary, department_id], (err, rows) => {
+      db.query(insertQuery, [title, salary, department_id], (err, rows) => {
         if (err) throw err;
         console.log("Row inserted with id = "
           + rows.insertId);
@@ -189,7 +189,7 @@ async function addEmployee() {
       role_id = answers["role_id"];
       manager_id = answers["manager_id"];
 
-      connection.query(insertQuery, [first_name, last_name, role_id, manager_id], (err, rows) => {
+      db.query(insertQuery, [first_name, last_name, role_id, manager_id], (err, rows) => {
         if (err) throw err;
         console.log("Row inserted with id = "
           + rows.insertId);
