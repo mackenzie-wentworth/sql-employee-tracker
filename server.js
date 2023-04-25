@@ -2,7 +2,7 @@
 const mysql = require('mysql2');
 const inquirer = require('inquirer');
 const consoleTable = require('console.table');
-const { DeptPrompt, RolePrompt, EmployeePrompt} = require("./InsertPrompts");
+const { DeptPrompt, RolePrompt, EmployeePrompt } = require("./InsertPrompts");
 
 const PORT = process.env.PORT || 3001;
 
@@ -110,11 +110,11 @@ function viewQuery(queryUsed) {
 }
 
 
-  //   .then((response) =>
-  //     response.option === response.quitOption
-  //     ? console.log('Success! Please make your next selection.')
-  //     : console.log('Exited Options menu, goodbye.')
-  // );
+//   .then((response) =>
+//     response.option === response.quitOption
+//     ? console.log('Success! Please make your next selection.')
+//     : console.log('Exited Options menu, goodbye.')
+// );
 
 
 
@@ -138,8 +138,8 @@ async function addDepartment() {
     })
 };
 
- // Prompt user for new role to add to database
- async function addRole() {
+// Prompt user for new role to add to database
+async function addRole() {
   var title = "";
   var salary = "";
   var department_id = "";
@@ -192,8 +192,11 @@ async function addEmployee() {
 
 // Update an employee role
 function updateEmployeeRole() {
+  var employeeList = [];
+  var roleList = [];
 
-  db.query(viewEmployeeQuery, function (err, res) {
+
+  db.query(viewEmployeeQuery, function (err, result) {
     if (err) throw (err);
     inquirer
       .prompt([
@@ -202,8 +205,39 @@ function updateEmployeeRole() {
           type: "list",
 
           message: "Which employee's role is changing?",
-          choices: []
+          choices: function () {
+
+            result.forEach(result => {
+              employeeList.push(
+                result.last_name
+              );
+            })
+            return employeeList;
+          }
         }
       ])
+
+      .then(function (answer) {
+        console.log(answer);
+        const name = answer.employeeName;
+
+        db.query(viewRolesQuery, function (err, res) {
+          inquirer
+            .prompt([
+              {
+                name: "role",
+                type: "list",
+                message: "What is their new role?",
+                choices: function () {
+                  res.forEach(res => {
+                    roleList.push(
+                      res.title)
+                  })
+                  return roleList;
+                }
+              }
+            ])
+        })
+      })
   })
 };
