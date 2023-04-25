@@ -28,24 +28,6 @@ const RolePrompt = [
         message:"Which department does the role belong to?"
     }
 ]
-// Added ManagerPrompt to go with 'manager_id' in schema.sql file
-// const ManagerPrompt = [
-//     {
-//         type:"input",
-//         name:"firstName",
-//         message:"What is the manager's first name?"
-//     },
-//     {
-//         type:"input",
-//         name:"lastName",
-//         message:"What is the manager's last name?"
-//     },
-//     {
-//         type:"input",
-//         name:"department",
-//         message:"Which department does the manager belong to?"
-//     }
-// ]
 
 // TODO: WHEN I choose to add an employee
 // THEN I am prompted to enter the employee’s first name, last name, role, and manager, and that employee is added to the database

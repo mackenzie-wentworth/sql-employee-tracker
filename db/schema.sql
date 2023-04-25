@@ -20,14 +20,6 @@ CREATE TABLE role (
     FOREIGN KEY(department_id) REFERENCES departments(id)
 );
 
--- Added MANAGER table to be the PRIMARY KEY for 'manager_id' in the employee table
-CREATE TABLE manager (
-    id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
-    first_name VARCHAR (30) NOT NULL,
-    last_name VARCHAR (30) NOT NULL,
-    department_id INT NOT NULL
-);
-
 -- TODO: Create 'ALL employees' table (INCLUDES: id, first_name, last_name, role_id, manager_id)
 CREATE TABLE employee (
     id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
