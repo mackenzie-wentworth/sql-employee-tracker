@@ -63,44 +63,44 @@ function init() {
       message: "What would you like to do?",
       name: "option",
       choices: [
-        viewDeptOption,
-        viewRolesOption,
         viewEmployeeOption,
-        addDeptOption,
-        addRoleOption,
         addEmployeeOption,
         updateEmployeeRoleOption,
+        viewRolesOption,
+        addRoleOption,
+        viewDeptOption,
+        addDeptOption,
         quitOption
       ]
     })
     .then(function ({ option }) {
       switch (option) {
-        case viewDeptOption:
-          viewQuery(viewDeptQuery);
+        case viewEmployeeOption:
+          viewQuery(viewEmployeeQuery);
+          break;
+
+        case addEmployeeOption:
+          addEmployee();
+          break;
+        
+        case updateEmployeeRoleOption:
+          updateEmployeeRole();
           break;
 
         case viewRolesOption:
           viewQuery(viewRolesQuery);
           break;
 
-        case viewEmployeeOption:
-          viewQuery(viewEmployeeQuery);
-          break;
-
-        case addDeptOption:
-          addDepartment();
-          break;
-
         case addRoleOption:
           addRole();
           break;
 
-        case addEmployeeOption:
-          addEmployee();
+        case viewDeptOption:
+          viewQuery(viewDeptQuery);
           break;
 
-        case updateEmployeeRoleOption:
-          updateEmployeeRole();
+        case addDeptOption:
+          addDepartment();
           break;
 
         case quitOption:
