@@ -43,6 +43,7 @@ function displayAppTitle() {
 // Prompt options: (1)View all departments, (2)View all roles, (3)View all employees, (4)Add a department, (5)Add a role, (6)Add an employee, (7)Update an employee role
 const viewEmployeeOption = "View All Employees";
 const addEmployeeOption = "Add Employee";
+const removeEmployeeOption = "Remove Employee";
 const updateEmployeeRoleOption = "Update Employee Role";
 const viewRolesOption = "View All Roles";
 const addRoleOption = "Add Role";
@@ -65,6 +66,7 @@ function init() {
       choices: [
         viewEmployeeOption,
         addEmployeeOption,
+        removeEmployeeOption,
         updateEmployeeRoleOption,
         viewRolesOption,
         addRoleOption,
@@ -81,6 +83,10 @@ function init() {
 
         case addEmployeeOption:
           addEmployee();
+          break;
+
+        case removeEmployeeOption:
+          removeEmployee();
           break;
         
         case updateEmployeeRoleOption:
@@ -145,6 +151,26 @@ async function addEmployee() {
     })
 };
 
+// Prompt user for employee id to delete employee from the database
+function removeEmployee() {
+
+  db.query(viewEmployeeQuery, function (err, results) {
+      if (err) throw (err);
+      inquirer
+        .prompt([
+          {
+            name: "deleteEmployeeId",
+            type: "input",
+            message: "What's the Employee ID of the person you want to delete from the database?"
+          }
+      ]).then((answer) => {
+          db.query(`DELETE FROM employee WHERE ?`, { id: answer.deleteEmployeeId })
+          init();
+      })
+  })
+};
+
+
 // Update an employee role
 function updateEmployeeRole() {
   var employeeList = [];
@@ -157,7 +183,6 @@ function updateEmployeeRole() {
         {
           name: "employeeName",
           type: "list",
-
           message: "Which employee's role is changing?",
           choices: function () {
 
