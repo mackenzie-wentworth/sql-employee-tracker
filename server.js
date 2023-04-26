@@ -41,14 +41,13 @@ function displayAppTitle() {
 
 
 // Prompt options: (1)View all departments, (2)View all roles, (3)View all employees, (4)Add a department, (5)Add a role, (6)Add an employee, (7)Update an employee role
-
-const viewDeptOption = "View All Departments";
-const viewRolesOption = "View All Roles";
 const viewEmployeeOption = "View All Employees";
-const addDeptOption = "Add A Department";
-const addRoleOption = "Add A Role";
-const addEmployeeOption = "Add An Employee";
-const updateEmployeeRoleOption = "Update An Employee Role";
+const addEmployeeOption = "Add Employee";
+const updateEmployeeRoleOption = "Update Employee Role";
+const viewRolesOption = "View All Roles";
+const addRoleOption = "Add Role";
+const viewDeptOption = "View All Departments";
+const addDeptOption = "Add Department";
 const quitOption = "Quit";
 
 // Queries 
