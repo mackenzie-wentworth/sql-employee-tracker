@@ -119,50 +119,6 @@ function viewQuery(queryUsed) {
   });
 }
 
-// Prompt user for new department to add to the database
-async function addDepartment() {
-  var name = "";
-
-  let insertQuery = `INSERT INTO department (name) VALUES (?);`;
-
-  inquirer.prompt(DeptPrompt)
-    .then((answers) => {
-      name = answers["name"];
-
-      db.query(insertQuery, [name], (err, rows) => {
-        if (err) throw err;
-        console.log("Row inserted with id = "
-          + rows.insertId);
-        init();
-      });
-
-    })
-};
-
-// Prompt user for new role to add to database
-async function addRole() {
-  var title = "";
-  var salary = "";
-  var department_id = "";
-
-  let insertQuery = `INSERT INTO role (title, salary, department_id) VALUES (?,?,?);`;
-
-  inquirer.prompt(RolePrompt)
-    .then((answers) => {
-      title = answers["title"];
-      salary = answers["salary"];
-      department_id = answers["department_id"];
-
-      db.query(insertQuery, [title, salary, department_id], (err, rows) => {
-        if (err) throw err;
-        console.log("Row inserted with id = "
-          + rows.insertId);
-        init();
-      });
-
-    })
-};
-
 // Prompt user for new employee to add to the database
 async function addEmployee() {
   var first_name = "";
@@ -258,3 +214,48 @@ function updateEmployeeRole() {
       })
   })
 };
+
+// Prompt user for new role to add to database
+async function addRole() {
+  var title = "";
+  var salary = "";
+  var department_id = "";
+
+  let insertQuery = `INSERT INTO role (title, salary, department_id) VALUES (?,?,?);`;
+
+  inquirer.prompt(RolePrompt)
+    .then((answers) => {
+      title = answers["title"];
+      salary = answers["salary"];
+      department_id = answers["department_id"];
+
+      db.query(insertQuery, [title, salary, department_id], (err, rows) => {
+        if (err) throw err;
+        console.log("Row inserted with id = "
+          + rows.insertId);
+        init();
+      });
+
+    })
+};
+
+// Prompt user for new department to add to the database
+async function addDepartment() {
+  var name = "";
+
+  let insertQuery = `INSERT INTO department (name) VALUES (?);`;
+
+  inquirer.prompt(DeptPrompt)
+    .then((answers) => {
+      name = answers["name"];
+
+      db.query(insertQuery, [name], (err, rows) => {
+        if (err) throw err;
+        console.log("Row inserted with id = "
+          + rows.insertId);
+        init();
+      });
+
+    })
+};
+
