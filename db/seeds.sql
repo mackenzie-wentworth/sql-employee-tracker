@@ -21,11 +21,11 @@ VALUES  (1, "Sales Lead", 100000, 4),
 
 -- employee data to pre-populate employee table
 INSERT INTO employee (id, role_id, first_name, last_name, manager_id)
-VALUES  (1, 1, "John", "Doe", 3),
-        (2, 2, "Mike", "Chan", 4),
+VALUES  (1, 1, "John", "Doe", null),
+        (2, 2, "Mike", "Chan", 1),
         (3, 3, "Ashley", "Rodriguez", 1),
-        (4, 4, "Kevin", "Tupik", 2),
-        (5, 5, "Kunal", "Singh", 7),
-        (6, 6, "Malia", "Brown", 8),
-        (7, 7, "Sarah", "Lourd", 5),
-        (8, 8, "Tom", "Allen", 6);
+        (4, 4, "Kevin", "Tupik", 1),
+        (5, 5, "Kunal", "Singh", 1),
+        (6, 6, "Malia", "Brown", 1),
+        (7, 7, "Sarah", "Lourd", 1),
+        (8, 8, "Tom", "Allen", 1);
