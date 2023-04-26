@@ -52,7 +52,7 @@ const quitOption = "Quit";
 
 // Queries 
 const viewDeptQuery = "SELECT * FROM department";
-const viewRolesQuery = "SELECT * FROM role";
+const viewRolesQuery = "SELECT role.id, role.title, department.name AS department, role.salary FROM role LEFT JOIN department on role.department_id = department.id;";
 const viewEmployeeQuery = "SELECT * FROM employee";
 
 // function which prompts the user for what action they should take
