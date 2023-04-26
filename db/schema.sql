@@ -17,7 +17,7 @@ CREATE TABLE role (
     title VARCHAR (30) NOT NULL,
     salary DECIMAL NOT NULL,
     department_id INT NOT NULL,
-    FOREIGN KEY(department_id) REFERENCES departments(id)
+    FOREIGN KEY(department_id) REFERENCES department(id)
 );
 
 -- TODO: Create 'ALL employees' table (INCLUDES: id, first_name, last_name, role_id, manager_id)
