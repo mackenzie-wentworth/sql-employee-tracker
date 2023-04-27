@@ -8,7 +8,6 @@ const DeptPrompt = [
     }
 ]
 
-
 // TODO:WHEN I choose to add a role
 // THEN I am prompted to enter the name, salary, and department for the role and that role is added to the database
 const RolePrompt = [
@@ -45,12 +44,12 @@ const EmployeePrompt = [
     {
         type:"input",
         name:"role_id",
-        message:"What is the employee's role?"
+        message:"What is the employee's role? Please enter the role ID#:"
     },
     {
         type:"input",
         name:"manager_id",
-        message:"Who is the employee's manager?"
+        message:"Who is the employee's manager? Please enter the manager's employee ID#:"
     }
 ]
 
