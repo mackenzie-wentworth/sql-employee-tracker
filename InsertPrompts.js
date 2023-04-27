@@ -25,7 +25,7 @@ const RolePrompt = [
     {
         type:"input",
         name:"department_id",
-        message:"Which department does the role belong to?"
+        message:"Which department does the role belong to? Please enter the department ID#:"
     }
 ]
 
