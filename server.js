@@ -53,7 +53,7 @@ const quitOption = "Quit";
 // Queries 
 const viewDeptQuery = "SELECT * FROM department";
 const viewRolesQuery = "SELECT role.id, role.title, department.name AS department, role.salary FROM role LEFT JOIN department on role.department_id = department.id;";
-const viewEmployeeQuery = "SELECT employee.id, employee.first_name, employee.last_name, role.title AS title, department.name AS department, role.salary AS salary, employee.manager_id AS manager, FROM employee";
+const viewEmployeeQuery = "SELECT emp.id AS id, emp.first_name, emp.last_name, rol.title AS title, dept.name AS department, rol.salary, CONCAT(mgmt.first_name, ' ', mgmt.last_name) AS manager FROM employee emp LEFT JOIN role rol ON emp.role_id = rol.id LEFT JOIN department dept ON dept.id = rol.department_id LEFT JOIN employee mgmt ON emp.manager_id = mgmt.id";
 
 // function which prompts the user for what action they should take
 function init() {
