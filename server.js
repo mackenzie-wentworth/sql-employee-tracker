@@ -217,28 +217,44 @@ function updateEmployeeRole() {
 };
 
 // Prompt user for new role to add to database
-async function addRole() {
-  var title = "";
-  var salary = "";
-  var department_id = "";
+function addRole() {
+  db.query(`SELECT * FROM department;`, (err, res) => {
+    if (err) throw err;
+    let departments = res.map(department => ({ name: department.department_name, value: department.department_id }));
+    inquirer.prompt([
+      {
+        type: 'input',
+        name: 'title',
+        message: 'What is the name of the role you want to add?'
+      },
+      {
+        type: 'input',
+        name: 'salary',
+        message: 'What is the salary of the role you want to add?'
+      },
+      {
 
-  let insertQuery = `INSERT INTO role (title, salary, department_id) VALUES (?,?,?);`;
+        type: 'list',
+        name: 'deptName',
+        message: 'Which department do you want to add the new role to?',
+        choices: departments
+      },
 
-  inquirer.prompt(RolePrompt)
-    .then((answers) => {
-      title = answers["title"];
-      salary = answers["salary"];
-      department_id = answers["department_id"];
-
-      db.query(insertQuery, [title, salary, department_id], (err, rows) => {
-        if (err) throw err;
-        console.log("Row inserted with id = "
-          + rows.insertId);
-        init();
-      });
-
+    ]).then((response) => {
+      db.query(`INSERT INTO role SET ?`,
+        {
+          title: response.title,
+          salary: response.salary,
+          department_id: response.deptName,
+        },
+        (err, res) => {
+          if (err) throw err;
+          console.log(`\n ${response.title} successfully added to database! \n`);
+          init();
+        })
     })
-};
+  })
+}
 
 // Prompt user for new department to add to the database
 async function addDepartment() {
