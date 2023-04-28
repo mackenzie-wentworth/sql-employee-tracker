@@ -2,7 +2,7 @@
 const mysql = require('mysql2');
 const inquirer = require('inquirer');
 const consoleTable = require('console.table');
-const { DeptPrompt, RolePrompt, EmployeePrompt } = require("./InsertPrompts");
+// const { DeptPrompt, RolePrompt, EmployeePrompt } = require("./InsertPrompts");
 
 const PORT = process.env.PORT || 3001;
 
@@ -81,7 +81,7 @@ function init() {
         case addEmployeeOption:
           addEmployee();
           break;
-        
+
         case updateEmployeeRoleOption:
           updateEmployeeRole();
           break;
@@ -140,7 +140,7 @@ async function addEmployee() {
         {
           type: 'list',
           name: 'role',
-          message: 'What is the new employee\'s title?',
+          message: 'What is the new employee\'s role?',
           choices: roles
         },
         {
@@ -180,6 +180,7 @@ function updateEmployeeRole() {
   db.query(`SELECT * FROM role;`, (err, res) => {
     if (err) throw err;
     let roles = res.map(role => ({ name: role.title, value: role.role_id }));
+
     db.query(`SELECT * FROM employee;`, (err, res) => {
       if (err) throw err;
       let employees = res.map(employee => ({ name: employee.first_name + ' ' + employee.last_name, value: employee.employee_id }));
@@ -187,20 +188,21 @@ function updateEmployeeRole() {
         {
           type: 'list',
           name: 'employee',
-          message: 'Which employee would you like to update the role for?',
+          message: 'Which employee\'s role do you want to update?',
           choices: employees
         },
         {
           type: 'list',
-          name: 'newRole',
-          message: 'What should the employee\'s new role be?',
+          name: 'updatedRole',
+          message: 'Which role do you want to assign the selected employee?',
           choices: roles
         },
+
       ]).then((response) => {
         db.query(`UPDATE employee SET ? WHERE ?`,
           [
             {
-              role_id: response.newRole,
+              role_id: response.updatedRole,
             },
             {
               employee_id: response.employee,
@@ -233,10 +235,9 @@ function addRole() {
         message: 'What is the salary of the role you want to add?'
       },
       {
-
         type: 'list',
         name: 'deptName',
-        message: 'Which department do you want to add the new role to?',
+        message: 'Which department does the role belong to?',
         choices: departments
       },
 
@@ -259,20 +260,23 @@ function addRole() {
 // Prompt user for new department to add to the database
 async function addDepartment() {
   var name = "";
-
   let insertQuery = `INSERT INTO department (name) VALUES (?);`;
 
-  inquirer.prompt(DeptPrompt)
-    .then((answers) => {
-      name = answers["name"];
+  inquirer.prompt(
+    {
+      type: "input",
+      name: "name",
+      message: "What is the name of the department?"
+    }
+  ).then((answers) => {
+    name = answers["name"];
 
-      db.query(insertQuery, [name], (err, rows) => {
-        if (err) throw err;
-        console.log("Row inserted with id = "
-          + rows.insertId);
-        init();
-      });
-
-    })
+    db.query(insertQuery, [name], (err, rows) => {
+      if (err) throw err;
+      console.log("Row inserted with id = "
+        + rows.insertId);
+      init();
+    });
+  })
 };
 
