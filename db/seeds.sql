@@ -2,7 +2,7 @@
 USE employeesMgmtDB;
 
 -- department data to pre-populate department table
-INSERT INTO department (id, name)
+INSERT INTO department (id, department_name)
 VALUES  (1, "Engineering"),
         (2, "Finance"),
         (3, "Legal"),
