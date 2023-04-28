@@ -33,22 +33,22 @@ const RolePrompt = [
 const EmployeePrompt = [
     {
         type:"input",
-        name:"first_name",
+        name:"firstName",
         message:"What is the employee's first name?"
     },
     {
         type:"input",
-        name:"last_name",
+        name:"lastName",
         message:"What is the employee's last name?"
     },
     {
         type:"input",
-        name:"role_id",
+        name:"role",
         message:"What is the employee's role? Please enter the role ID#:"
     },
     {
         type:"input",
-        name:"manager_id",
+        name:"manager",
         message:"Who is the employee's manager? Please enter the manager's employee ID#:"
     }
 ]

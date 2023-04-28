@@ -39,7 +39,6 @@ function displayAppTitle() {
 `);
 }
 
-
 // Prompt options: (1)View all departments, (2)View all roles, (3)View all employees, (4)Add a department, (5)Add a role, (6)Add an employee, (7)Update an employee role
 const viewEmployeeOption = "View All Employees";
 const addEmployeeOption = "Add Employee";
@@ -121,28 +120,59 @@ function viewQuery(queryUsed) {
 
 // Prompt user for new employee to add to the database
 async function addEmployee() {
-  var first_name = "";
-  var last_name = "";
-  var role_id = "";
-  var manager_id = "";
-
-  let insertQuery = `INSERT INTO employee (first_name, last_name, role_id, manager_id) VALUES (?,?,?,?);`;
-
-  inquirer.prompt(EmployeePrompt)
-    .then((answers) => {
-      first_name = answers["first_name"];
-      last_name = answers["last_name"];
-      role_id = answers["role_id"];
-      manager_id = answers["manager_id"];
-
-      db.query(insertQuery, [first_name, last_name, role_id, manager_id], (err, rows) => {
-        if (err) throw err;
-        console.log("Row inserted with id = "
-          + rows.insertId);
-        init();
-      });
-
+  db.query(`SELECT * FROM role;`, (err, res) => {
+    if (err) throw err;
+    let roles = res.map(role => ({ name: role.title, value: role.role_id }));
+    db.query(`SELECT * FROM employee;`, (err, res) => {
+      if (err) throw err;
+      let employees = res.map(employee => ({ name: employee.first_name + ' ' + employee.last_name, value: employee.employee_id }));
+      inquirer.prompt([
+        {
+          type: 'input',
+          name: 'firstName',
+          message: 'What is the new employee\'s first name?'
+        },
+        {
+          type: 'input',
+          name: 'lastName',
+          message: 'What is the new employee\'s last name?'
+        },
+        {
+          type: 'list',
+          name: 'role',
+          message: 'What is the new employee\'s title?',
+          choices: roles
+        },
+        {
+          type: 'list',
+          name: 'manager',
+          message: 'Who is the new employee\'s manager?',
+          choices: employees
+        }
+      ]).then((response) => {
+        db.query(`INSERT INTO employee SET ?`,
+          {
+            first_name: response.firstName,
+            last_name: response.lastName,
+            role_id: response.role,
+            manager_id: response.manager,
+          },
+          (err, res) => {
+            if (err) throw err;
+          })
+        db.query(`INSERT INTO role SET ?`,
+          {
+            department_id: response.dept,
+          },
+          (err, res) => {
+            if (err) throw err;
+            console.log(`\n ${response.firstName} ${response.lastName} successfully added to database! \n`);
+            init();
+          })
+      })
     })
+  })
+
 };
 
 // Update an employee role
@@ -195,10 +225,10 @@ function updateEmployeeRole() {
               console.log(role);
               db.query('SELECT * FROM role WHERE title = ?', [role], function (err, res) {
                 if (err) throw (err);
-                let newRole = res[0].id;
+                let roleId = res[0].role;
 
                 let query = "UPDATE employee SET role_id = ? WHERE last_name =  ?";
-                let values = [parseInt(newRole), name]
+                let values = [parseInt(roleId), name]
 
                 db.query(query, values,
                   function (err, res, fields) {
