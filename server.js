@@ -160,8 +160,9 @@ async function addEmployee() {
           (err, res) => {
             if (err) throw err;
             console.log(`\n ${response.firstName} ${response.lastName} successfully added to database! \n`);
+            init();
           })
-          init();
+          // init();
         // db.query(`INSERT INTO role SET ?`,
         //   {
         //     department_id: response.dept,
@@ -202,7 +203,7 @@ function updateEmployeeRole() {
         
 
       ]).then((response) => {
-        db.query(`UPDATE employee SET role_id = ? WHERE ?`,
+        db.query(`UPDATE employee SET role_id = ? WHERE id = ?`,
           [
             response.udatedRole,
             response.employee
