@@ -51,8 +51,8 @@ const quitOption = "Quit";
 
 // Queries 
 const viewDeptQuery = "SELECT * FROM department";
-const viewRolesQuery = "SELECT role.id, role.title, department.name AS department, role.salary FROM role LEFT JOIN department ON role.department_id = department.id;";
-const viewEmployeeQuery = "SELECT emp.id AS id, emp.first_name, emp.last_name, rol.title AS title, dept.name AS department, rol.salary, CONCAT(mgmt.first_name, ' ', mgmt.last_name) AS manager FROM employee emp LEFT JOIN role rol ON emp.role_id = rol.id LEFT JOIN department dept ON dept.id = rol.department_id LEFT JOIN employee mgmt ON emp.manager_id = mgmt.id";
+const viewRolesQuery = "SELECT role.id, role.title, department.department_name AS department, role.salary FROM role LEFT JOIN department ON role.department_id = department.id;";
+const viewEmployeeQuery = "SELECT emp.id AS id, emp.first_name, emp.last_name, rol.title AS title, dept.department_name AS department, rol.salary, CONCAT(mgmt.first_name, ' ', mgmt.last_name) AS manager FROM employee emp LEFT JOIN role rol ON emp.role_id = rol.id LEFT JOIN department dept ON dept.id = rol.department_id LEFT JOIN employee mgmt ON emp.manager_id = mgmt.id";
 
 // function which prompts the user for what action they should take
 function init() {
@@ -222,7 +222,7 @@ function updateEmployeeRole() {
 function addRole() {
   db.query(`SELECT * FROM department;`, (err, res) => {
     if (err) throw err;
-    let departments = res.map(department => ({ name: department.department_name, value: department.department_id }));
+    let departments = res.map(department => ({ name: department.department_name, value: department.id }));
     inquirer.prompt([
       {
         type: 'input',
@@ -250,7 +250,7 @@ function addRole() {
         },
         (err, res) => {
           if (err) throw err;
-          console.log(`\n ${response.title} successfully added to database! \n`);
+          console.log(`\n New ${response.title} role successfully added to database! \n`);
           init();
         })
     })
@@ -260,21 +260,22 @@ function addRole() {
 // Prompt user for new department to add to the database
 async function addDepartment() {
   var name = "";
-  let insertQuery = `INSERT INTO department (name) VALUES (?);`;
+  let insertQuery = `INSERT INTO department (department_name) VALUES (?);`;
 
   inquirer.prompt(
     {
       type: "input",
-      name: "name",
+      name: "addDept",
       message: "What is the name of the department?"
     }
   ).then((answers) => {
-    name = answers["name"];
+    name = answers["addDept"];
 
     db.query(insertQuery, [name], (err, rows) => {
       if (err) throw err;
-      console.log("Row inserted with id = "
-        + rows.insertId);
+      // console.log("New department successfully added. New department inserted with id = "
+      //   + rows.insertId);
+        console.log(`\n ${name} department successfully added to database! \n`);
       init();
     });
   })
