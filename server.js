@@ -2,7 +2,6 @@
 const mysql = require('mysql2');
 const inquirer = require('inquirer');
 const consoleTable = require('console.table');
-// const { DeptPrompt, RolePrompt, EmployeePrompt } = require("./InsertPrompts");
 
 const PORT = process.env.PORT || 3001;
 
@@ -162,16 +161,6 @@ async function addEmployee() {
             console.log(`\n ${response.firstName} ${response.lastName} successfully added to database! \n`);
             init();
           })
-          // init();
-        // db.query(`INSERT INTO role SET ?`,
-        //   {
-        //     department_id: response.dept,
-        //   },
-        //   (err, res) => {
-        //     if (err) throw err;
-        //     console.log(`\n ${response.firstName} ${response.lastName} successfully added to database! \n`);
-        //     init();
-        //   })
       })
     })
   })
