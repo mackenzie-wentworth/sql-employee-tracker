@@ -122,10 +122,10 @@ function viewQuery(queryUsed) {
 async function addEmployee() {
   db.query(`SELECT * FROM role;`, (err, res) => {
     if (err) throw err;
-    let roles = res.map(role => ({ name: role.title, value: role.role_id }));
+    let roles = res.map(role => ({ name: role.title, value: role.id }));
     db.query(`SELECT * FROM employee;`, (err, res) => {
       if (err) throw err;
-      let employees = res.map(employee => ({ name: employee.first_name + ' ' + employee.last_name, value: employee.employee_id }));
+      let employees = res.map(employee => ({ name: employee.first_name + ' ' + employee.last_name, value: employee.id }));
       inquirer.prompt([
         {
           type: 'input',
@@ -159,16 +159,18 @@ async function addEmployee() {
           },
           (err, res) => {
             if (err) throw err;
-          })
-        db.query(`INSERT INTO role SET ?`,
-          {
-            department_id: response.dept,
-          },
-          (err, res) => {
-            if (err) throw err;
             console.log(`\n ${response.firstName} ${response.lastName} successfully added to database! \n`);
-            init();
           })
+          init();
+        // db.query(`INSERT INTO role SET ?`,
+        //   {
+        //     department_id: response.dept,
+        //   },
+        //   (err, res) => {
+        //     if (err) throw err;
+        //     console.log(`\n ${response.firstName} ${response.lastName} successfully added to database! \n`);
+        //     init();
+        //   })
       })
     })
   })
@@ -179,11 +181,11 @@ async function addEmployee() {
 function updateEmployeeRole() {
   db.query(`SELECT * FROM role;`, (err, res) => {
     if (err) throw err;
-    let roles = res.map(role => ({ name: role.title, value: role.role_id }));
+    let roles = res.map(role => ({ name: role.title, value: role.id }));
 
     db.query(`SELECT * FROM employee;`, (err, res) => {
       if (err) throw err;
-      let employees = res.map(employee => ({ name: employee.first_name + ' ' + employee.last_name, value: employee.employee_id }));
+      let employees = res.map(employee => ({ name: employee.first_name + ' ' + employee.last_name, value: employee.id }));
       inquirer.prompt([
         {
           type: 'list',
@@ -197,16 +199,17 @@ function updateEmployeeRole() {
           message: 'Which role do you want to assign the selected employee?',
           choices: roles
         },
+        
 
       ]).then((response) => {
         db.query(`UPDATE employee SET ? WHERE ?`,
           [
             {
-              role_id: response.updatedRole,
-            },
-            {
               employee_id: response.employee,
             },
+            {
+              role_id: response.updatedRole,
+            }
           ],
           (err, res) => {
             if (err) throw err;
