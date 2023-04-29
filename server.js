@@ -202,14 +202,10 @@ function updateEmployeeRole() {
         
 
       ]).then((response) => {
-        db.query(`UPDATE employee SET ? WHERE ?`,
+        db.query(`UPDATE employee SET role_id = ? WHERE ?`,
           [
-            {
-              employee_id: response.employee,
-            },
-            {
-              role_id: response.updatedRole,
-            }
+            response.udatedRole,
+            response.employee
           ],
           (err, res) => {
             if (err) throw err;
