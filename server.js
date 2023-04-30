@@ -16,7 +16,7 @@ const db = mysql.createConnection(
     password: '12345',
     database: 'employeesMgmtDB'
   },
-  console.log(`Connected to the employeesMgmtDB database`)
+  console.log(`Connected to the employeesMgmtDB database!`)
 );
 
 db.connect(function (err) {
