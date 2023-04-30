@@ -110,6 +110,7 @@ After you've set up your environment, you are now ready to use the SQL Employee 
 
 
 ### *Video Demonstration:*
+[video-demo-sql-tracker.webm](https://user-images.githubusercontent.com/122484637/235380291-d0c2b507-6c7c-4258-a6b5-e2e3abc9a8e7.webm)
 
 ---
 
