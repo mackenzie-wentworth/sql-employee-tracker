@@ -189,7 +189,7 @@ function updateEmployeeRole() {
           message: 'Which role do you want to assign the selected employee?',
           choices: roles
         },
-        
+
 
       ]).then((response) => {
         db.query(`UPDATE employee SET role_id = ? WHERE id = ?`,
@@ -262,9 +262,7 @@ async function addDepartment() {
 
     db.query(insertQuery, [name], (err, rows) => {
       if (err) throw err;
-      // console.log("New department successfully added. New department inserted with id = "
-      //   + rows.insertId);
-        console.log(`\n ${name} department successfully added to database! \n`);
+      console.log(`\n ${name} department successfully added to database! \n`);
       init();
     });
   })

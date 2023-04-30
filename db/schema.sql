@@ -10,7 +10,6 @@ CREATE TABLE department (
     department_name VARCHAR (30) NOT NULL
 );
 
-
 -- TODO: Create 'ALL roles' table (INCLUDES: id, title, salary, department_id)
 CREATE TABLE role (
     id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
