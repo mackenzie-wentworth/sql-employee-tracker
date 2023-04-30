@@ -103,14 +103,14 @@ After you've set up your environment, you are now ready to use the SQL Employee 
 3. You should see a response in your terminal that greets you with the following:
 
 
-     ![An image to demonstrate where in GitHub to click the green "code" button to copy SSH URL.](./assets/images/emp-mgr-display-options.png)
+     ![An image to demonstrate the terminal greeting once the application is initialized.](./assets/images/emp-mgr-display-options.png)
 
 
 4. You are now ready to select, view, and manage the database options for the SQL Employee Tracker!
 
 
 ### *Video Demonstration:*
-[video-demo-sql-tracker.webm](https://user-images.githubusercontent.com/122484637/235380291-d0c2b507-6c7c-4258-a6b5-e2e3abc9a8e7.webm)
+[Watch video demo here!](https://user-images.githubusercontent.com/122484637/235380291-d0c2b507-6c7c-4258-a6b5-e2e3abc9a8e7.webm)
 
 ---
 
