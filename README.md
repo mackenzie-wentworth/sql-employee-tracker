@@ -121,4 +121,4 @@ If you have any questions, please see my contact information below to reach me f
 
 
 ## License
-This project is covered under the [MIT License](./LICENSE). For more details, please click the license button under 'Badges' at the top of the page.
+This project is covered under the [MIT License](./LICENSE). For more details, please click the license icon at the top of the page.
